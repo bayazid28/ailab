@@ -1,0 +1,36 @@
+graph = {
+    'A' : ['B', 'C', 'D'],
+    'B' : [],
+    'C' : ['F', 'E', 'D'],
+    'D' : ['F'],
+    'E' : ['H', 'G'],
+    'F' : ['G'],
+    'H' : [],
+    'I' : [],
+    'G' : ['H', 'I']
+}
+
+src = 'A'
+goal = 'I'
+maxDepth = 3
+
+def labelSearch(graph, currentNode, goal, maximumLabel):
+  if(currentNode == goal):
+    return True
+  if(maximumLabel <= 0):
+    return False
+  
+  for childNode in graph[currentNode]:
+    ret = labelSearch(graph, childNode, goal, maximumLabel - 1)
+    if( ret == True):
+      return True
+  return False
+
+ret = False
+for maximumLabel in range(maxDepth):
+  ret = labelSearch(graph, src, goal, maximumLabel)
+  if(ret == True):
+    print("We have reached our goal ",maximumLabel)
+    break
+if(ret == False):
+  print("Oopss.....goal is not reachable!!!!!!")
