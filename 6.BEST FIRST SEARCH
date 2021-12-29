@@ -1,0 +1,41 @@
+from queue import PriorityQueue
+
+graph = {
+    0: [1, 2, 3],
+    1: [6],
+    2: [4],
+    3: [],
+    4: [],
+    5: [],
+    6: []
+}
+
+h = [30, 25, 23, 35, 37, 1000, 0]
+
+HValues = []
+for i in range(7):
+  node_h = int(input())
+  HValues.append(node_h)
+print(HValues)
+
+open = PriorityQueue()
+open.put((30,0))
+closed = []
+parent = ['jani na'] * 7
+print(parent, open, closed)
+
+goal = 6
+while open.qsize() != 0:
+  currentNode = open.get()
+  if(currentNode[1] == goal):
+    print("Goal found")
+    break
+
+  print(currentNode)
+  for childNode in graph[currentNode[1]]:
+    parent[childNode] = currentNode[1]
+    print('parent of ',childNode, 'is ', currentNode[1])
+    print(childNode)
+    open.put((HValues[childNode],childNode))
+
+print(parent)
