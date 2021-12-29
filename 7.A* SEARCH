@@ -1,0 +1,39 @@
+
+from queue import PriorityQueue
+
+graph = {
+    0: [(1,10),(2,3), (3,5)],
+    1: [(6,17)],
+    2: [(4,8)],
+    3: [],
+    4: [],
+    5: [],
+    6: []
+}
+
+h = [30,25,23,35,37,1000,0]
+
+p_cost=[1000]*7
+p_cost[0]=0
+
+open = PriorityQueue()
+open.put((30,0))
+closed = []
+parent = ['jani na'] * 7
+print(parent, open, closed)
+
+goal = 4
+while open.qsize() != 0:
+  currentNode = open.get()
+  if(currentNode[1] == goal):
+    print("Goal found")
+    print("Path Cost = ",p_cost[currentNode[1]])
+    print(currentNode)
+    break
+
+  for childNode in graph[currentNode[1]]:
+    parent[childNode[0]] = currentNode[1]
+    p_cost[childNode[0]]=p_cost[currentNode[1]]+childNode[1]
+    open.put((h[childNode[0]]+p_cost[childNode[0]],childNode[0]))
+
+print(parent)
