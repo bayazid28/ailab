@@ -14,7 +14,7 @@ src = 'A'
 goal = 'I'
 maxDepth = 3
 
-def labelSearch(graph, currentNode, goal, maximumLabel):
+def labelSearch(visited,graph, currentNode, goal, maximumLabel):
   if(currentNode == goal):
     return True
   if(maximumLabel <= 0):
